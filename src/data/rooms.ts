@@ -1,0 +1,78 @@
+import { Room } from '../types';
+import { experienceExtras } from './extras';
+
+export const rooms: Room[] = [
+  {
+    id: 'vinculo',
+    name: 'El Vínculo',
+    tagline: 'Intimidad · Conexión · Misterio Compartido',
+    description: 'Hay secretos que solo se revelan cuando dos personas deciden avanzar juntas. Decisiones que no funcionan en solitario. Momentos que solo tienen sentido cuando se comparten. El Vínculo es una experiencia diseñada para explorar la complicidad, la comunicación y la tensión emocional entre personas que ya se conocen… o creen conocerse.',
+    fullDescription: 'Nada ocurre sin consenso. Nada se resuelve sin conexión. Aquí, el tiempo no corre en tu contra. Te observa.',
+    duration: '2 horas',
+    intensity: ['Bajo', 'Medio', 'Alto'],
+    persons: '2',
+    price: 140,
+    idealFor: [
+      'Parejas',
+      'Relaciones estables',
+      'Reencuentros',
+      'Lovers que buscan algo distinto y profundo',
+    ],
+    includes: [
+      'Ajuste de intensidad configurable',
+      'Ritmo adaptado a tu conexión',
+      'Detalles sensoriales desde boutique',
+      'Opción de extensión de tiempo',
+    ],
+    availableExtras: experienceExtras,
+  },
+  {
+    id: 'territorio-salvaje',
+    name: 'Territorio Salvaje',
+    tagline: 'Urbano · Instinto · Provocación',
+    description: 'La ciudad tiene un lado que no aparece de día. Muros que observan. Símbolos que desafían. Territorios donde el instinto manda. Territorio Salvaje es una experiencia cruda, urbana y directa. Más rápida. Más intensa. Más imprevisible.',
+    fullDescription: 'Aquí no se viene a analizar demasiado. Se viene a reaccionar. A jugar con la tensión del momento. A dejarse llevar. No hay mapas. Solo señales.',
+    duration: '2 horas',
+    intensity: ['Bajo', 'Medio', 'Alto'],
+    persons: '2',
+    price: 140,
+    idealFor: [
+      'Personas que se acaban de conocer',
+      'Rolletes',
+      'Amigos con derecho',
+      'Experiencias casuales con chispa',
+    ],
+    includes: [
+      'Nivel de intensidad configurable',
+      'Ritmo más dinámico o progresivo',
+      'Estética urbana seleccionable',
+      'Ampliación de tiempo disponible',
+    ],
+    availableExtras: experienceExtras,
+  },
+  {
+    id: 'mascarada',
+    name: 'La Mascarada',
+    tagline: 'Ritual · Identidad · Juego Social',
+    description: 'Cuando todos llevan máscara, nadie miente. O quizá todos lo hacen. La Mascarada es una experiencia elegante, oscura y ceremonial. Un entorno donde las normas cambian, los roles se diluyen y cada decisión tiene peso.',
+    fullDescription: 'Aquí no importa quién eres fuera. Importa qué versión decides mostrar dentro. Nada es explícito. Todo es sugerido. Y no todo el mundo juega igual.',
+    duration: '2 horas',
+    intensity: ['Bajo', 'Medio', 'Alto'],
+    persons: '2-6',
+    price: 180,
+    badge: 'GRUPOS',
+    idealFor: [
+      'Grupos abiertos',
+      'Público libertino',
+      'Swingers',
+      'Personas con curiosidad y mente abierta',
+    ],
+    includes: [
+      'Elección de nivel de intensidad',
+      'Ajuste de dinámica grupal',
+      'Elementos estéticos rituales desde boutique',
+      'Extensión de tiempo para experiencia profunda',
+    ],
+    availableExtras: experienceExtras,
+  },
+];
