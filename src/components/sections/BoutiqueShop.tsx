@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import { ArrowLeft, Gift, Star } from 'lucide-react';
+import { Gift, Star } from 'lucide-react';
 import Section from '../ui/Section';
+import PageBackLink from '../layout/PageBackLink';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import SectionHeader from '../ui/SectionHeader';
@@ -10,11 +11,7 @@ import { products } from '../../data/products';
 const inputClass =
   'w-full px-5 py-4 bg-eroscape-surface border border-purple-500/20 focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/30 rounded-xl text-eroscape-text-primary placeholder:text-eroscape-text-muted font-body text-base outline-none transition-[border-color,box-shadow] duration-300';
 
-interface BoutiqueShopProps {
-  onBack: () => void;
-}
-
-export default function BoutiqueShop({ onBack }: BoutiqueShopProps) {
+export default function BoutiqueShop() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const promosRef = useRef<HTMLDivElement>(null);
   const newsletterRef = useRef<HTMLDivElement>(null);
@@ -41,16 +38,7 @@ export default function BoutiqueShop({ onBack }: BoutiqueShopProps) {
 
   return (
     <div id="boutique" className="min-h-screen bg-eroscape-void pt-6 pb-16">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 mb-8">
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-2 font-body text-sm text-purple-300 hover:text-purple-200 transition-colors duration-200"
-        >
-          <ArrowLeft size={18} strokeWidth={1.5} />
-          Volver a la experiencia
-        </button>
-      </div>
+      <PageBackLink />
 
       <Section className="!py-0">
         <div className="mb-12 relative overflow-hidden rounded-2xl">

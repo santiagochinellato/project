@@ -3,15 +3,7 @@ import Card from '../ui/Card';
 import ExpandExperienceBlock from './ExpandExperienceBlock';
 import OffersPromoCitiesBlock from './OffersPromoCitiesBlock';
 
-interface PricingDetailsContentProps {
-  onNavigate: (section: string) => void;
-  onOpenBoutique?: () => void;
-}
-
-export default function PricingDetailsContent({
-  onNavigate,
-  onOpenBoutique,
-}: PricingDetailsContentProps) {
+export default function PricingDetailsContent() {
   const paymentMethods = [
     'Tarjetas de crédito y débito',
     'PayPal y Apple Pay',
@@ -29,11 +21,7 @@ export default function PricingDetailsContent({
 
   return (
     <>
-      <ExpandExperienceBlock
-        onNavigate={onNavigate}
-        onOpenBoutique={onOpenBoutique}
-        className="mb-16"
-      />
+      <ExpandExperienceBlock className="mb-16" />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         <Card>
@@ -142,7 +130,7 @@ export default function PricingDetailsContent({
         </Card>
       </div>
 
-      <OffersPromoCitiesBlock onNavigate={onNavigate} className="pt-4" />
+      <OffersPromoCitiesBlock className="pt-4" />
     </>
   );
 }

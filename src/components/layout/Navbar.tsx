@@ -1,42 +1,50 @@
 import { useState } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 import Badge from '../ui/Badge';
-
-interface NavbarProps {
-  onNavigate: (section: string) => void;
-}
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
 const LOGO_SRC = '/images/eros-logo-ico.png';
 
 const menuItems = [
-  { label: 'Experiencia', section: 'experiencia' },
-  { label: 'Digital', section: 'digital', new: true },
-  { label: 'Boutique', section: 'boutique' },
-  { label: 'Salas', section: 'salas' },
-  { label: 'Reservar', section: 'reservar' },
-  { label: 'Seguridad', section: 'seguridad' },
-  { label: 'Precios', section: 'precios' },
-  { label: 'Franquicia', section: 'franquicia', highlight: true },
-  { label: 'FAQ', section: 'faq' },
+  { label: 'Experiencia', to: ROUTES.experiencia },
+  { label: 'Digital', to: ROUTES.digital, new: true },
+  { label: 'Boutique', to: ROUTES.boutique },
+  { label: 'Salas', to: ROUTES.salas },
+  { label: 'Reservar', to: ROUTES.reservar },
+  { label: 'Seguridad', to: ROUTES.seguridad },
+  { label: 'Precios', to: ROUTES.precios },
+  { label: 'Franquicia', to: ROUTES.franquicia, highlight: true },
+  { label: 'FAQ', to: ROUTES.faq },
 ] as const;
 
-export default function Navbar({ onNavigate }: NavbarProps) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { goToBooking } = useSiteNavigate();
 
-  const handleClick = (section: string) => {
-    onNavigate(section);
-    setIsOpen(false);
-  };
-
-  const linkClass = (item: (typeof menuItems)[number]) =>
+  const linkClass = ({ isActive }: { isActive: boolean }, item: (typeof menuItems)[number]) =>
     `font-body text-sm font-medium tracking-wide transition-colors duration-200 ${
-      item.highlight
-        ? 'text-eroscape-gold hover:text-eroscape-gold-light'
-        : item.new
-          ? 'text-purple-300 hover:text-purple-200'
-          : 'text-eroscape-text-secondary hover:text-eroscape-text-primary'
+      isActive
+        ? 'text-eroscape-text-primary'
+        : 'highlight' in item && item.highlight
+          ? 'text-eroscape-gold hover:text-eroscape-gold-light'
+          : 'new' in item && item.new
+            ? 'text-purple-300 hover:text-purple-200'
+            : 'text-eroscape-text-secondary hover:text-eroscape-text-primary'
     }`;
+
+  const handleCtaReservar = () => {
+    setIsOpen(false);
+    if (location.pathname === ROUTES.home) {
+      goToBooking();
+    } else {
+      navigate(ROUTES.reservar);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50">
@@ -46,10 +54,9 @@ export default function Navbar({ onNavigate }: NavbarProps) {
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8">
           <div className="flex items-center justify-between gap-4 h-[4.5rem] lg:h-20">
-            {/* Logo + marca */}
-            <button
-              type="button"
-              onClick={() => handleClick('home')}
+            <NavLink
+              to={ROUTES.home}
+              onClick={() => setIsOpen(false)}
               className="group flex items-center gap-3 shrink-0 text-left transition-opacity duration-200 hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 rounded-xl"
               aria-label="EROSCAPE — Ir al inicio"
             >
@@ -71,41 +78,39 @@ export default function Navbar({ onNavigate }: NavbarProps) {
                   EROSCAPE
                 </span>
               </span>
-            </button>
+            </NavLink>
 
-            {/* Enlaces desktop — centrados */}
             <div className="hidden lg:flex flex-1 items-center justify-center gap-1 xl:gap-2">
               {menuItems.map((item) => (
-                <button
-                  key={item.section}
-                  type="button"
-                  onClick={() => handleClick(item.section)}
-                  className={`inline-flex items-center gap-2 px-3 xl:px-4 py-2 rounded-lg hover:bg-purple-500/[0.06] ${linkClass(item)}`}
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `inline-flex items-center gap-2 px-3 xl:px-4 py-2 rounded-lg hover:bg-purple-500/[0.06] ${linkClass({ isActive }, item)}`
+                  }
                 >
                   {item.label}
-                  {item.new && (
+                  {'new' in item && item.new && (
                     <Badge variant="accent" className="text-[9px] px-1.5 py-0 leading-5">
                       NUEVO
                     </Badge>
                   )}
-                </button>
+                </NavLink>
               ))}
             </div>
 
-            {/* CTA desktop */}
             <div className="hidden lg:flex items-center gap-4 shrink-0">
               <span
                 className="h-8 w-px bg-gradient-to-b from-transparent via-purple-500/30 to-transparent"
                 aria-hidden="true"
               />
-              <Button onClick={() => handleClick('reservar')} size="sm" className="min-w-[7.5rem]">
+              <Button onClick={handleCtaReservar} size="sm" className="min-w-[7.5rem]">
                 Reservar
               </Button>
             </div>
 
-            {/* Móvil: CTA compacto + menú */}
             <div className="flex lg:hidden items-center gap-2 shrink-0">
-              <Button onClick={() => handleClick('reservar')} size="sm" className="!px-4 !py-2 text-sm">
+              <Button onClick={handleCtaReservar} size="sm" className="!px-4 !py-2 text-sm">
                 Reservar
               </Button>
               <button
@@ -122,7 +127,6 @@ export default function Navbar({ onNavigate }: NavbarProps) {
           </div>
         </div>
 
-        {/* Panel móvil */}
         <div
           id="mobile-nav"
           className={`lg:hidden overflow-hidden border-t border-purple-500/15 bg-eroscape-deep/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out ${
@@ -131,15 +135,17 @@ export default function Navbar({ onNavigate }: NavbarProps) {
         >
           <div className="max-w-7xl mx-auto px-5 py-4 space-y-1">
             {menuItems.map((item) => (
-              <button
-                key={item.section}
-                type="button"
-                onClick={() => handleClick(item.section)}
-                className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition-colors duration-200 hover:bg-purple-500/[0.08] ${linkClass(item)}`}
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition-colors duration-200 hover:bg-purple-500/[0.08] ${linkClass({ isActive }, item)}`
+                }
               >
                 <span className="text-base">{item.label}</span>
                 {item.new && <Badge variant="accent">NUEVO</Badge>}
-              </button>
+              </NavLink>
             ))}
           </div>
         </div>

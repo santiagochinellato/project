@@ -1,13 +1,11 @@
 import { Gift, Sparkles, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Section from '../ui/Section';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import SectionHeader from '../ui/SectionHeader';
 import { products } from '../../data/products';
-
-interface BoutiqueTeaserProps {
-  onOpenBoutique: () => void;
-}
+import { ROUTES } from '../../lib/paths';
 
 const previewProducts = products.slice(0, 3);
 
@@ -17,7 +15,7 @@ const perks = [
   { icon: Star, label: '15% permanente con Membresía VIP' },
 ] as const;
 
-export default function BoutiqueTeaser({ onOpenBoutique }: BoutiqueTeaserProps) {
+export default function BoutiqueTeaser() {
   return (
     <Section id="boutique-preview" className="relative overflow-hidden">
       <div className="mb-10 relative overflow-hidden rounded-2xl">
@@ -62,9 +60,11 @@ export default function BoutiqueTeaser({ onOpenBoutique }: BoutiqueTeaserProps) 
       </div>
 
       <div className="text-center">
-        <Button size="lg" onClick={onOpenBoutique} className="min-w-[14rem]">
-          Explorar la Boutique
-        </Button>
+        <Link to={ROUTES.boutique}>
+          <Button size="lg" className="min-w-[14rem] pointer-events-none">
+            Explorar la Boutique
+          </Button>
+        </Link>
         <p className="mt-4 font-body text-sm text-eroscape-text-muted max-w-md mx-auto">
           Reserva kits, activa promos para nuevos usuarios y gestiona tu membresía VIP desde la
           boutique.

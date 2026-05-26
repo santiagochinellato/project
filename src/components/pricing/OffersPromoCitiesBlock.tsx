@@ -1,17 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 import { specialOffers } from '../../data/specialOffers';
 
 interface OffersPromoCitiesBlockProps {
-  onNavigate: (section: string) => void;
   className?: string;
 }
 
-export default function OffersPromoCitiesBlock({
-  onNavigate,
-  className = '',
-}: OffersPromoCitiesBlockProps) {
-  const goToBooking = () => onNavigate('reservar');
+export default function OffersPromoCitiesBlock({ className = '' }: OffersPromoCitiesBlockProps) {
+  const navigate = useNavigate();
+  const { goToBooking } = useSiteNavigate();
 
   return (
     <div className={className}>
@@ -64,7 +64,7 @@ export default function OffersPromoCitiesBlock({
             </Button>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button variant="outline" onClick={() => onNavigate('salas')}>
+            <Button variant="outline" onClick={() => navigate(ROUTES.salas)}>
               Ver salas y experiencias
             </Button>
             <Button onClick={goToBooking}>Ir a reservar</Button>

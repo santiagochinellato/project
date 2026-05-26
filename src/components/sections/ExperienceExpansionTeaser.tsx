@@ -1,11 +1,9 @@
 import { Calendar, Gift, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
-
-interface ExperienceExpansionTeaserProps {
-  onNavigate: (section: string) => void;
-  onOpenBoutique?: () => void;
-}
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
 const expansions = [
   {
@@ -25,10 +23,10 @@ const expansions = [
   },
 ] as const;
 
-export default function ExperienceExpansionTeaser({
-  onNavigate,
-  onOpenBoutique,
-}: ExperienceExpansionTeaserProps) {
+export default function ExperienceExpansionTeaser() {
+  const navigate = useNavigate();
+  const { goToBooking } = useSiteNavigate();
+
   return (
     <div className="pt-10 border-t border-purple-500/15">
       <div className="text-center mb-8">
@@ -57,15 +55,13 @@ export default function ExperienceExpansionTeaser({
       </div>
 
       <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
-        <Button onClick={() => onNavigate('salas')}>Ver salas y experiencias</Button>
-        <Button variant="outline" onClick={() => onNavigate('reservar')}>
+        <Button onClick={() => navigate(ROUTES.salas)}>Ver salas y experiencias</Button>
+        <Button variant="outline" onClick={goToBooking}>
           Reservar ya
         </Button>
-        {onOpenBoutique && (
-          <Button variant="ghost" onClick={onOpenBoutique}>
-            Explorar boutique
-          </Button>
-        )}
+        <Button variant="ghost" onClick={() => navigate(ROUTES.boutique)}>
+          Explorar boutique
+        </Button>
       </div>
     </div>
   );

@@ -1,15 +1,11 @@
 import { useCallback, useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
 import Section from '../ui/Section';
 import Button from '../ui/Button';
+import PageBackLink from '../layout/PageBackLink';
 import DigitalIntroCover from '../digital/DigitalIntroCover';
 import DigitalAppExperience from '../digital/DigitalAppExperience';
 
-interface DigitalPageProps {
-  onBack: () => void;
-}
-
-export default function DigitalPage({ onBack }: DigitalPageProps) {
+export default function DigitalPage() {
   const goToApp = useCallback(() => {
     const element = document.getElementById('digital-app');
     if (element) {
@@ -28,16 +24,7 @@ export default function DigitalPage({ onBack }: DigitalPageProps) {
 
   return (
     <div id="digital" className="min-h-screen bg-eroscape-void pt-6 pb-16">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 mb-8">
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-2 font-body text-sm text-purple-300 hover:text-purple-200 transition-colors duration-200"
-        >
-          <ArrowLeft size={18} strokeWidth={1.5} />
-          Volver a la experiencia
-        </button>
-      </div>
+      <PageBackLink />
 
       <Section className="!py-0" dark>
         <DigitalIntroCover />

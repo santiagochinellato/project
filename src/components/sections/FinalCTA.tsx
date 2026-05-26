@@ -3,12 +3,10 @@ import Section from '../ui/Section';
 import Button from '../ui/Button';
 import SectionHeader from '../ui/SectionHeader';
 import Card from '../ui/Card';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
-interface FinalCTAProps {
-  onNavigate: (section: string) => void;
-}
-
-export default function FinalCTA({ onNavigate }: FinalCTAProps) {
+export default function FinalCTA() {
+  const { goToBooking } = useSiteNavigate();
   return (
     <Section id="final-cta" dark className="text-center relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.08] pointer-events-none" aria-hidden="true">
@@ -58,7 +56,7 @@ export default function FinalCTA({ onNavigate }: FinalCTAProps) {
           </p>
         </Card>
 
-        <Button size="lg" onClick={() => onNavigate('reservar')} className="text-lg px-12">
+        <Button size="lg" onClick={goToBooking} className="text-lg px-12">
           <Sparkles size={24} strokeWidth={1.5} />
           Reservar mi experiencia
         </Button>

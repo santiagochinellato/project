@@ -1,25 +1,19 @@
 import { Calendar, Gift, Shield } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
 interface ExpandExperienceBlockProps {
-  onNavigate: (section: string) => void;
-  onOpenBoutique?: () => void;
   className?: string;
 }
 
-export default function ExpandExperienceBlock({
-  onNavigate,
-  onOpenBoutique,
-  className = '',
-}: ExpandExperienceBlockProps) {
-  const openBoutique = () => {
-    if (onOpenBoutique) {
-      onOpenBoutique();
-      return;
-    }
-    onNavigate('boutique');
-  };
+export default function ExpandExperienceBlock({ className = '' }: ExpandExperienceBlockProps) {
+  const navigate = useNavigate();
+  const { goToBooking } = useSiteNavigate();
+
+  const openBoutique = () => navigate(ROUTES.boutique);
 
   return (
     <div className={className}>
@@ -86,7 +80,7 @@ export default function ExpandExperienceBlock({
           <Button size="lg" onClick={openBoutique} className="min-w-[14rem]">
             Ver todos los extras disponibles
           </Button>
-          <Button variant="outline" onClick={() => onNavigate('reservar')}>
+          <Button variant="outline" onClick={goToBooking}>
             Reservar con extras
           </Button>
         </div>

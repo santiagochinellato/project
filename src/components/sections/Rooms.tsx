@@ -7,18 +7,19 @@ import ExperienceExpansionTeaser from './ExperienceExpansionTeaser';
 import OffersPromoCitiesBlock from '../pricing/OffersPromoCitiesBlock';
 import { thematicExperiences } from '../../data/thematicExperiences';
 import { openWhatsApp } from '../../lib/whatsapp';
-
-interface RoomsProps {
-  onNavigate: (section: string) => void;
-  onRequestSpecialEvent: (eventTypeId?: string) => void;
-  onOpenBoutique?: () => void;
-}
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
 const normalExperiences = thematicExperiences.filter((e) => e.tier === 'normal');
 const premiumExperiences = thematicExperiences.filter((e) => e.tier === 'premium');
 
-export default function Rooms({ onNavigate, onRequestSpecialEvent, onOpenBoutique }: RoomsProps) {
-  const goToBooking = () => onNavigate('reservar');
+export default function Rooms() {
+  const { navigateToSection, goToBooking, navigate } = useSiteNavigate();
+
+  const requestSpecialEvent = (eventTypeId?: string) => {
+    const query = eventTypeId ? `?tipo=${eventTypeId}` : '';
+    navigate(`${ROUTES.eventos}${query}#reservar-evento`);
+  };
 
   return (
     <Section id="salas">
@@ -60,7 +61,7 @@ export default function Rooms({ onNavigate, onRequestSpecialEvent, onOpenBoutiqu
       </div>
 
       <div className="max-w-5xl mx-auto mb-14 md:mb-16 pt-10 border-t border-purple-500/15">
-        <EventsShowcase variant="compact" onRequestQuote={onRequestSpecialEvent} />
+        <EventsShowcase variant="compact" onRequestQuote={requestSpecialEvent} />
       </div>
 
       <Card className="max-w-4xl mx-auto text-center mb-14 md:mb-16" hover={false}>
@@ -72,7 +73,7 @@ export default function Rooms({ onNavigate, onRequestSpecialEvent, onOpenBoutiqu
           encontrar la perfecta según tus preferencias y límites.
         </p>
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
-          <Button onClick={() => onNavigate('salas')}>Ver todas las experiencias</Button>
+          <Button onClick={() => navigateToSection('salas')}>Ver todas las experiencias</Button>
           <Button onClick={goToBooking}>Descubre tu experiencia</Button>
           <Button
             variant="outline"
@@ -86,10 +87,10 @@ export default function Rooms({ onNavigate, onRequestSpecialEvent, onOpenBoutiqu
       </Card>
 
       <div className="max-w-5xl mx-auto mb-14 md:mb-16">
-        <ExperienceExpansionTeaser onNavigate={onNavigate} onOpenBoutique={onOpenBoutique} />
+        <ExperienceExpansionTeaser />
       </div>
 
-      <OffersPromoCitiesBlock onNavigate={onNavigate} className="max-w-5xl mx-auto pt-10 border-t border-purple-500/15" />
+      <OffersPromoCitiesBlock className="max-w-5xl mx-auto pt-10 border-t border-purple-500/15" />
     </Section>
   );
 }

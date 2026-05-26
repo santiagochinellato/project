@@ -1,15 +1,12 @@
 import { Smartphone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Section from '../ui/Section';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import Badge from '../ui/Badge';
+import { ROUTES } from '../../lib/paths';
 
-interface DigitalTeaserProps {
-  onOpenDigital: () => void;
-  onGoToApp: () => void;
-}
-
-export default function DigitalTeaser({ onOpenDigital, onGoToApp }: DigitalTeaserProps) {
+export default function DigitalTeaser() {
   return (
     <Section id="digital-preview" dark>
       <div className="flex justify-center mb-6">
@@ -41,12 +38,16 @@ export default function DigitalTeaser({ onOpenDigital, onGoToApp }: DigitalTease
       </Card>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button size="lg" onClick={onOpenDigital} className="min-w-[14rem]">
-          Descubrir Digital
-        </Button>
-        <Button variant="outline" size="lg" onClick={onGoToApp} className="min-w-[14rem]">
-          Ve a la aplicación
-        </Button>
+        <Link to={ROUTES.digital}>
+          <Button size="lg" className="min-w-[14rem] pointer-events-none">
+            Descubrir Digital
+          </Button>
+        </Link>
+        <Link to={`${ROUTES.digital}#digital-app`}>
+          <Button variant="outline" size="lg" className="min-w-[14rem] pointer-events-none">
+            Ve a la aplicación
+          </Button>
+        </Link>
       </div>
     </Section>
   );

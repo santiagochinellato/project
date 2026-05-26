@@ -1,4 +1,5 @@
 import { CreditCard, Shield, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Section from '../ui/Section';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
@@ -6,12 +7,8 @@ import SectionHeader from '../ui/SectionHeader';
 import IntensityLevelsBlock from '../pricing/IntensityLevelsBlock';
 import ExpandExperienceBlock from '../pricing/ExpandExperienceBlock';
 import OffersPromoCitiesBlock from '../pricing/OffersPromoCitiesBlock';
-
-interface PricingTeaserProps {
-  onOpenPricing: () => void;
-  onOpenBoutique: () => void;
-  onNavigate: (section: string) => void;
-}
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
 const previewCards = [
   {
@@ -31,7 +28,9 @@ const previewCards = [
   },
 ] as const;
 
-export default function PricingTeaser({ onOpenPricing, onOpenBoutique, onNavigate }: PricingTeaserProps) {
+export default function PricingTeaser() {
+  const { goToBooking } = useSiteNavigate();
+
   return (
     <Section id="precios-preview">
       <SectionHeader
@@ -41,10 +40,7 @@ export default function PricingTeaser({ onOpenPricing, onOpenBoutique, onNavigat
       />
 
       <div className="mb-14">
-        <IntensityLevelsBlock
-          onReserve={() => onNavigate('reservar')}
-          showReserveButton={false}
-        />
+        <IntensityLevelsBlock onReserve={goToBooking} showReserveButton={false} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10 max-w-5xl mx-auto">
@@ -60,21 +56,19 @@ export default function PricingTeaser({ onOpenPricing, onOpenBoutique, onNavigat
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14">
-        <Button size="lg" onClick={onOpenPricing} className="min-w-[14rem]">
-          Ver precios y condiciones
-        </Button>
-        <Button variant="outline" size="lg" onClick={() => onNavigate('reservar')} className="min-w-[12rem]">
+        <Link to={ROUTES.precios}>
+          <Button size="lg" className="min-w-[14rem] pointer-events-none">
+            Ver precios y condiciones
+          </Button>
+        </Link>
+        <Button variant="outline" size="lg" onClick={goToBooking} className="min-w-[12rem]">
           Reservar ya
         </Button>
       </div>
 
-      <ExpandExperienceBlock
-        onNavigate={onNavigate}
-        onOpenBoutique={onOpenBoutique}
-        className="mb-14"
-      />
+      <ExpandExperienceBlock className="mb-14" />
 
-      <OffersPromoCitiesBlock onNavigate={onNavigate} className="pt-10 border-t border-purple-500/15" />
+      <OffersPromoCitiesBlock className="pt-10 border-t border-purple-500/15" />
     </Section>
   );
 }

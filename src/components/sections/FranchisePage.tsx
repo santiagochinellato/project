@@ -1,13 +1,9 @@
 import { useCallback, useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
 import Section from '../ui/Section';
+import PageBackLink from '../layout/PageBackLink';
 import FranchiseContent from '../franchise/FranchiseContent';
 
-interface FranchisePageProps {
-  onBack: () => void;
-}
-
-export default function FranchisePage({ onBack }: FranchisePageProps) {
+export default function FranchisePage() {
   const scrollToForm = useCallback(() => {
     const element = document.getElementById('franquicia-form');
     if (element) {
@@ -26,16 +22,7 @@ export default function FranchisePage({ onBack }: FranchisePageProps) {
 
   return (
     <div id="franquicia" className="min-h-screen bg-eroscape-void pt-6 pb-16">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 mb-8">
-        <button
-          type="button"
-          onClick={onBack}
-          className="inline-flex items-center gap-2 font-body text-sm text-purple-300 hover:text-purple-200 transition-colors duration-200"
-        >
-          <ArrowLeft size={18} strokeWidth={1.5} />
-          Volver a la experiencia
-        </button>
-      </div>
+      <PageBackLink />
 
       <Section className="!py-0 relative overflow-hidden" dark>
         <div className="absolute inset-0 opacity-5 pointer-events-none" aria-hidden="true">

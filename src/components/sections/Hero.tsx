@@ -1,13 +1,13 @@
 import { Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
 import Section from '../ui/Section';
 import Badge from '../ui/Badge';
+import { ROUTES } from '../../lib/paths';
+import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
-interface HeroProps {
-  onNavigate: (section: string) => void;
-}
-
-export default function Hero({ onNavigate }: HeroProps) {
+export default function Hero() {
+  const { goToBooking } = useSiteNavigate();
   return (
     <Section id="home" noPadding className="min-h-screen flex items-center relative overflow-hidden !px-5 md:!px-8 pt-0">
       <div
@@ -45,13 +45,15 @@ export default function Hero({ onNavigate }: HeroProps) {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" onClick={() => onNavigate('reservar')}>
+          <Button size="lg" onClick={goToBooking}>
             <Sparkles size={20} strokeWidth={1.5} />
             Reservar ahora
           </Button>
-          <Button variant="outline" size="lg" onClick={() => onNavigate('salas')}>
-            Explorar salas
-          </Button>
+          <Link to={ROUTES.salas}>
+            <Button variant="outline" size="lg" className="pointer-events-none">
+              Explorar salas
+            </Button>
+          </Link>
         </div>
 
         <div className="mt-16 font-body text-sm text-purple-400 font-medium">
@@ -72,9 +74,11 @@ export default function Hero({ onNavigate }: HeroProps) {
               Se el primero en traer esta experiencia revolucionaria a tu ciudad. Inversión única en un
               mercado sin competencia.
             </p>
-            <Button variant="gold" fullWidth onClick={() => onNavigate('franquicia')}>
-              Descubre la Franquicia
-            </Button>
+            <Link to={ROUTES.franquicia}>
+              <Button variant="gold" fullWidth className="pointer-events-none">
+                Descubre la Franquicia
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
