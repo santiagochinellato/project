@@ -34,13 +34,13 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
   return (
     <div className="fixed inset-0 bg-black/95 z-50 overflow-y-auto">
       <div className="min-h-screen px-4 py-8">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-8">
+        <div className="max-w-4xl mx-auto bg-eroscape-surface border border-purple-500/25 rounded-2xl p-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <Shield className="text-purple-400" size={32} />
-              <h2 className="text-3xl font-bold text-white">Formulario de Consentimiento</h2>
+              <h2 className="font-display text-3xl font-semibold text-eroscape-text-primary">Formulario de Consentimiento</h2>
             </div>
-            <button onClick={onClose} className="text-gray-400 hover:text-white">
+            <button onClick={onClose} className="text-eroscape-text-muted hover:text-eroscape-text-primary">
               <X size={24} />
             </button>
           </div>
@@ -65,7 +65,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('age')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Mayoría de Edad:</strong> Confirmo que soy mayor de 18 años y tengo plena capacidad legal para participar en experiencias para adultos.
                   </span>
                 </label>
@@ -77,7 +77,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('consent')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Consentimiento Informado:</strong> Entiendo que EROSCAPE ROOM® es una experiencia inmersiva para adultos con contenido erótico y sensual. Participo voluntariamente y con pleno conocimiento de la naturaleza de la experiencia.
                   </span>
                 </label>
@@ -89,7 +89,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('safeword')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Palabra Segura:</strong> He establecido mi palabra segura y comprendo que puedo utilizarla en cualquier momento para detener inmediatamente la experiencia sin consecuencias ni preguntas.
                   </span>
                 </label>
@@ -101,7 +101,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('limits')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Límites Personales:</strong> He definido claramente mis límites personales, preferencias y zonas de no consentimiento. Entiendo que estos serán respetados en todo momento.
                   </span>
                 </label>
@@ -119,7 +119,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('privacy')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Privacidad GDPR:</strong> Acepto el tratamiento de mis datos personales según la Política de Privacidad y el Reglamento General de Protección de Datos (GDPR). Mis datos serán utilizados exclusivamente para la gestión de la experiencia y mejora del servicio.
                   </span>
                 </label>
@@ -131,7 +131,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('recording')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">No Grabación:</strong> Entiendo y acepto la política de NO GRABACIÓN. Ningún dispositivo personal de grabación (móviles, cámaras, etc.) está permitido dentro de las salas. EROSCAPE ROOM® no graba ni registra imágenes de los participantes.
                   </span>
                 </label>
@@ -149,7 +149,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('health')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Estado de Salud:</strong> Declaro que mi estado físico y mental es adecuado para participar en esta experiencia. He informado de cualquier condición médica, alergia o limitación relevante.
                   </span>
                 </label>
@@ -161,7 +161,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
                     onChange={() => handleCheck('responsibility')}
                     className="mt-1 w-5 h-5 rounded border-purple-500/50 bg-black/50 text-purple-600 focus:ring-purple-500"
                   />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-eroscape-text-secondary group-hover:text-eroscape-text-primary transition-colors">
                     <strong className="text-purple-300">Responsabilidad Personal:</strong> Asumo la responsabilidad de mis decisiones y acciones durante la experiencia. Entiendo que EROSCAPE ROOM® proporciona un entorno controlado y seguro, pero soy responsable de respetar mis propios límites y los de otros participantes.
                   </span>
                 </label>
@@ -170,7 +170,7 @@ export default function ConsentForm({ onClose, onAccept }: ConsentFormProps) {
           </div>
 
           <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-6 mb-6">
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-eroscape-text-secondary text-sm leading-relaxed">
               Al aceptar este formulario de consentimiento, declaro haber leído, comprendido y aceptado todos los términos establecidos. Confirmo que mi participación es completamente voluntaria y que puedo retirar mi consentimiento en cualquier momento utilizando mi palabra segura o solicitando la finalización de la experiencia.
             </p>
           </div>

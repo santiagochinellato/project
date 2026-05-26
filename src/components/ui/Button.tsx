@@ -2,10 +2,52 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'gold';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
 }
+
+const variants = {
+  primary: `
+    bg-gradient-to-r from-purple-600 to-pink-600
+    hover:from-purple-500 hover:to-pink-500
+    text-white
+    shadow-[0_4px_20px_rgba(147,51,234,0.30)]
+    hover:shadow-[0_4px_32px_rgba(147,51,234,0.50)]
+  `,
+  secondary: `
+    bg-eroscape-elevated
+    border border-purple-500/30
+    hover:border-purple-400/60
+    hover:bg-purple-500/[0.07]
+    text-purple-300 hover:text-purple-200
+  `,
+  outline: `
+    bg-transparent
+    border border-purple-500/40
+    hover:border-purple-400/70
+    hover:bg-purple-500/[0.06]
+    text-purple-300 hover:text-eroscape-text-primary
+  `,
+  ghost: `
+    bg-transparent
+    text-eroscape-text-secondary hover:text-purple-300
+    hover:bg-purple-500/[0.06]
+  `,
+  gold: `
+    bg-gradient-to-r from-yellow-600 to-amber-500
+    hover:from-yellow-500 hover:to-amber-400
+    text-black font-bold
+    shadow-[0_4px_20px_rgba(212,175,55,0.25)]
+    hover:shadow-[0_4px_32px_rgba(212,175,55,0.40)]
+  `,
+};
+
+const sizes = {
+  sm: 'px-4 py-2 text-sm rounded-lg',
+  md: 'px-6 py-3 text-base rounded-xl',
+  lg: 'px-8 py-4 text-base md:text-lg rounded-xl',
+};
 
 export default function Button({
   children,
@@ -16,26 +58,19 @@ export default function Button({
   disabled = false,
   ...props
 }: ButtonProps) {
-  const baseClasses = 'font-semibold transition-all duration-300 rounded-lg inline-flex items-center justify-center';
-
-  const variantClasses = {
-    primary: 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl hover:scale-105',
-    secondary: 'bg-gray-900 hover:bg-gray-800 text-white border border-purple-500/30 hover:border-purple-500',
-    outline: 'bg-transparent border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:border-purple-400',
-  };
-
-  const sizeClasses = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
-  };
-
-  const widthClass = fullWidth ? 'w-full' : '';
-  const disabledClass = disabled ? 'opacity-50 cursor-not-allowed hover:scale-100' : '';
-
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${widthClass} ${disabledClass} ${className}`}
+      className={`
+        inline-flex items-center justify-center gap-2
+        font-body font-semibold
+        transition-[transform,opacity,box-shadow,background-color,border-color,color] duration-300
+        hover:scale-[1.02] active:scale-[0.98]
+        ${variants[variant]}
+        ${sizes[size]}
+        ${fullWidth ? 'w-full' : ''}
+        ${disabled ? 'opacity-40 cursor-not-allowed hover:scale-100' : ''}
+        ${className}
+      `}
       disabled={disabled}
       {...props}
     >

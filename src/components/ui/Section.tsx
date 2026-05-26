@@ -5,16 +5,29 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   dark?: boolean;
+  noPadding?: boolean;
 }
 
-export default function Section({ id, children, className = '', dark = false }: SectionProps) {
-  const bgClass = dark ? 'bg-black' : 'bg-gradient-to-b from-black to-gray-900';
-
+export default function Section({
+  id,
+  children,
+  className = '',
+  dark = false,
+  noPadding = false,
+}: SectionProps) {
   return (
-    <section id={id} className={`py-20 px-4 md:px-8 ${bgClass} ${className}`}>
-      <div className="max-w-7xl mx-auto">
-        {children}
-      </div>
+    <section
+      id={id}
+      className={`
+        relative
+        ${noPadding ? '' : 'py-24 md:py-32 px-5 md:px-8'}
+        ${dark ? 'bg-eroscape-deep' : 'bg-eroscape-void'}
+        ${className}
+      `}
+    >
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">{children}</div>
     </section>
   );
 }
