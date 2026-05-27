@@ -1,14 +1,20 @@
-import { Sparkles } from 'lucide-react';
+import { ArrowDown, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import Section from '../ui/Section';
 import Badge from '../ui/Badge';
 import { ROUTES } from '../../lib/paths';
-import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
 export default function Hero() {
-  const { goToBooking } = useSiteNavigate();
   const navigate = useNavigate();
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const offset = 88;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
 
   return (
     <Section
@@ -55,14 +61,18 @@ export default function Hero() {
         </div>
 
         <div className="mx-auto flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4">
-          <Button size="lg" onClick={goToBooking} className="w-full sm:w-auto sm:min-w-[12rem]">
-            <Sparkles size={20} strokeWidth={1.5} />
-            Reservar ahora
+          <Button
+            size="lg"
+            onClick={() => scrollTo('experiencia')}
+            className="w-full sm:w-auto sm:min-w-[12rem]"
+          >
+            <ArrowDown size={20} strokeWidth={1.5} />
+            Descubrí más
           </Button>
           <Button
             variant="outline"
             size="lg"
-            onClick={() => navigate(ROUTES.salas)}
+            onClick={() => scrollTo('salas')}
             className="w-full sm:w-auto sm:min-w-[12rem]"
           >
             Explorar salas
