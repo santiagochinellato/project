@@ -13,7 +13,7 @@ import {
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import SectionHeader from '../ui/SectionHeader';
-import { supabase } from '../../lib/supabase';
+import { isSupabaseConfigured, supabase } from '../../lib/supabase';
 import { trackEvent } from '../Analytics';
 
 export default function FranchiseContent() {
@@ -29,6 +29,10 @@ export default function FranchiseContent() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!isSupabaseConfigured || !supabase) {
+      setSubmitStatus('error');
+      return;
+    }
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -132,6 +136,22 @@ export default function FranchiseContent() {
         intro="Únete a la revolución del entretenimiento adulto. Sé el primero en traer esta experiencia física presencial a tu ciudad."
         variant="gold"
       />
+
+      {!isSupabaseConfigured && (
+        <Card
+          variant="gold"
+          hover={false}
+          className="mb-10 bg-eroscape-surface/80 border-yellow-500/30"
+        >
+          <p className="font-body text-sm sm:text-base text-eroscape-text-secondary leading-relaxed">
+            El formulario está temporalmente desactivado en este despliegue porque faltan variables de
+            entorno de Supabase. Configura{' '}
+            <span className="text-purple-300 font-semibold">VITE_SUPABASE_URL</span> y{' '}
+            <span className="text-purple-300 font-semibold">VITE_SUPABASE_ANON_KEY</span> en Vercel para
+            activarlo.
+          </p>
+        </Card>
+      )}
 
       <Card variant="gold" className="mb-12">
         <div className="text-center mb-8">
@@ -310,7 +330,13 @@ export default function FranchiseContent() {
                 Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.
               </div>
             )}
-            <Button variant="gold" fullWidth size="lg" disabled={isSubmitting} type="submit">
+            <Button
+              variant="gold"
+              fullWidth
+              size="lg"
+              disabled={isSubmitting || !isSupabaseConfigured}
+              type="submit"
+            >
               {isSubmitting ? 'Enviando...' : 'Solicitar Información'}
             </Button>
             <p className="font-body text-xs text-eroscape-text-muted text-center">
