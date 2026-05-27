@@ -4,11 +4,11 @@ import Section from '../ui/Section';
 import Button from '../ui/Button';
 import ExperienceCard from '../ui/ExperienceCard';
 import SectionHeader from '../ui/SectionHeader';
-import { thematicExperiences } from '../../data/thematicExperiences';
+import { getFeaturedExperiences } from '../../data/thematicExperiences';
 import { ROUTES } from '../../lib/paths';
 import { useSiteNavigate } from '../../hooks/useSiteNavigate';
 
-const featured = thematicExperiences.slice(0, 3);
+const featured = getFeaturedExperiences();
 
 export default function SalasTeaser() {
   const { goToBooking } = useSiteNavigate();

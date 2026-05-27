@@ -6,10 +6,28 @@ import Card from '../ui/Card';
 import Button from '../ui/Button';
 import SectionHeader from '../ui/SectionHeader';
 import Badge from '../ui/Badge';
+import OptimizedImage from '../ui/OptimizedImage';
 import { products } from '../../data/products';
 
 const inputClass =
   'w-full px-5 py-4 bg-eroscape-surface border border-purple-500/20 focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/30 rounded-xl text-eroscape-text-primary placeholder:text-eroscape-text-muted font-body text-base outline-none transition-[border-color,box-shadow] duration-300';
+
+const KIT_IMAGES = [
+  '/kits/pack-afterdark.PNG',
+  '/kits/pack-intimate-experience.PNG',
+  '/kits/pack5-escape-desire-box.PNG',
+  '/kits/pack00-mini-love-box.PNG',
+  '/kits/pack00-sweet-connection.PNG',
+] as const;
+
+const productImageById: Partial<Record<(typeof products)[number]['id'], string>> = {
+  'kit-sensorial': '/kits/pack-intimate-experience.PNG',
+  'box-privada': '/kits/pack-afterdark.PNG',
+  'cartas-deseo': '/kits/pack00-sweet-connection.PNG',
+  'lenceria-veneciana': '/kits/pack00-mini-love-box.PNG',
+  mascaras: '/kits/pack5-escape-desire-box.PNG',
+  'velas-masaje': '/kits/pack-afterdark.PNG',
+};
 
 export default function BoutiqueShop() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
@@ -41,13 +59,22 @@ export default function BoutiqueShop() {
       <PageBackLink />
 
       <Section className="!py-0">
-        <div className="mb-12 relative overflow-hidden rounded-2xl">
-          <img
-            src="/images/img_7272_2.jpeg"
-            alt="Luxury Boutique"
-            className="w-full h-72 object-cover opacity-20 hover:opacity-30 transition-opacity duration-500"
+        <div className="mb-12 relative overflow-hidden rounded-2xl border border-purple-500/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-950/35 via-black to-pink-950/25" />
+          <OptimizedImage
+            src={KIT_IMAGES[0]}
+            alt="Boutique EROSCAPE"
+            className="relative w-full h-64 md:h-80 object-cover opacity-45"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-eroscape-void via-black/60 to-transparent" />
+          <div
+            className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-purple-600/10 blur-[120px]"
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute -bottom-40 -right-32 h-[26rem] w-[26rem] rounded-full bg-pink-600/10 blur-[140px]"
+            aria-hidden="true"
+          />
         </div>
 
         <SectionHeader
@@ -83,26 +110,15 @@ export default function BoutiqueShop() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-          {filteredProducts.map((product) => {
-            const productImages: Record<string, string> = {
-              'kit-sensorial': 'https://images.pexels.com/photos/4046721/pexels-photo-4046721.jpeg',
-              'cartas-deseo': 'https://images.pexels.com/photos/6069733/pexels-photo-6069733.jpeg',
-              'lenceria-veneciana': 'https://images.pexels.com/photos/5240833/pexels-photo-5240833.jpeg',
-              mascaras: 'https://images.pexels.com/photos/8069107/pexels-photo-8069107.jpeg',
-              'velas-masaje': 'https://images.pexels.com/photos/3094215/pexels-photo-3094215.jpeg',
-              'box-privada': 'https://images.pexels.com/photos/4046721/pexels-photo-4046721.jpeg',
-            };
-
+          {filteredProducts.map((product, index) => {
+            const image = productImageById[product.id] ?? KIT_IMAGES[index % KIT_IMAGES.length];
             return (
               <Card key={product.id}>
                 <div className="relative bg-gradient-to-br from-purple-950/40 to-pink-950/20 rounded-xl h-48 mb-4 overflow-hidden">
-                  <img
-                    src={
-                      productImages[product.id] ||
-                      'https://images.pexels.com/photos/4046721/pexels-photo-4046721.jpeg'
-                    }
+                  <OptimizedImage
+                    src={image}
                     alt={product.name}
-                    className="w-full h-full object-cover opacity-60 hover:opacity-80 transition-opacity duration-300"
+                    className="w-full h-full object-cover opacity-70 hover:opacity-90 transition-opacity duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                 </div>

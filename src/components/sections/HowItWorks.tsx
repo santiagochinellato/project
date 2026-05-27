@@ -27,7 +27,7 @@ export default function HowItWorks() {
 
   return (
     <Section id="como-funciona" dark>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
         {['/images/img_7303.jpeg', '/images/img_7272_2 copy.jpeg', '/images/img_7280.jpeg'].map(
           (src, i) => (
             <div key={i} className="relative overflow-hidden rounded-2xl h-64">
@@ -40,7 +40,7 @@ export default function HowItWorks() {
             </div>
           )
         )}
-      </div>
+      </div> */}
 
       <SectionHeader
         eyebrow="PROCESO · CONSENTIMIENTO"
